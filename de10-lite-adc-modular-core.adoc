@@ -12,8 +12,7 @@
         ** 484 pins
         ** speed grade 7
     * Don't need simulation
-    * Finish
-   Project will be opened
+    * Finish, project will be opened
 
 2. In the IP Catalog, type 'ADC' (without the quotes)
     * Select "Modular ADC_core IP"
@@ -37,7 +36,7 @@
     * Click on the three dots right of the "File name" field
     * Select "adc.qsys" and click on the "Open" button
     * Then click on "Apply"
-   The file "adc.qsys" will be added
+	* The file "adc.qsys" will be added
     * Double-click on it if you wish to modify the ADC
 
 4. In the IP Catalog" type "PLL"
@@ -56,7 +55,7 @@
     * Leave 11 of 12 intact
     * Leave 12 of 12 intact and click "Finish"
     * In the dialog box, click "Yes".
-   The the "Files" tab, "pll.qip" will be added.
+   	* In the "Files" tab, "pll.qip" will be added.
 
 5. Now create a new VHDL file with the name "de10_lite_adc.vhdl"
     * Enter the followin VHDL code:
@@ -176,7 +175,7 @@ end architecture;
     * sw[1] at pin C11, set I/O Standard to "3.3-V LVMOS"
     * sw[0] at pin C10, set I/O Standard to "3.3-V LVMOS"
     * leave the rest (you can set reg_data(11 downto 0) to leds)
-   Note: the output will be assigned random and may be connected to leds
+    * Note: the output will be assigned random and may be connected to leds
 
 8. Add a SDC file
     * To the SDC file, add the following:
@@ -192,7 +191,6 @@ derive_clock_uncertainty
 
 [start=9]
 9. Check if you can synthesize the design (but do not download yet)
-
 
 10. In Quartus, from the Tools menu, select Signal Tap Logic Analyzer
     * Under "Signal Configuration, slect 'clk' as clock signal
