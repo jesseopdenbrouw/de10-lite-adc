@@ -2,7 +2,7 @@
 
 Projects using the onboard ADC of the https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=234&No=1021[DE10-Lite board] from Terasic.
 
-The DE10-Lite board is equipped with a MAX10iDA50 device. This device has two onboard ADCs but only the first ADC is connected to external pins. The pins of the second ADC are all connected to GND.
+The DE10-Lite board is equipped with a MAX10DA50 device. This device has two onboard ADCs but only the first ADC is connected to external pins. The pins of the second ADC are all connected to GND.
 
 
 The ADC has one dedicated analog input and eight dual digital/analog pins. The first ADC is also connected to the onboard temperature sensor.
