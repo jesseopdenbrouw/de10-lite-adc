@@ -61,6 +61,8 @@
 5. Now create a new VHDL file with the name "de10_lite_adc.vhdl"
     * Enter the followin VHDL code:
 
+[source,vhdl,subs=attributes+]
+----
 --startofvhdl
 library ieee;
 use ieee.std_logic_1164.all;
@@ -161,6 +163,7 @@ begin
      
 end architecture;
 --endofvhdl
+----
 
 6. Start "Analysis & Elaboration"
     * Check the synthesized design on the RTL Viewer
@@ -179,12 +182,14 @@ end architecture;
 8. Add a SDC file
     * To the SDC file, add the following:
 
+[source,vhdl,subs=attributes+]
+----
 ##beginascfile
 create_clock -period "50.0 MHz" [get_ports clk]
 derive_pll_clocks
 derive_clock_uncertainty
 ##endsdcfile
-
+----
     * save tha file as "de10_lite_adc.sdc"
 
 9. Check if you can synthesize the design (but do not download yet)
