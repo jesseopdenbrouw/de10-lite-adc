@@ -4,45 +4,45 @@
 
 
 1. Create a project using the DE10-Lite board
-    * top level name & project name: de10_lite_adc
-    * select Empty project
-    * don't add files
-    * select device 0M50DAF484C7G
-        * FBGA
-        * 484 pins
-        * speed grade 7
-    * don't need simulation
-    * finish
+    * Top level name & project name: de10_lite_adc
+    * Select Empty project
+    * Don't add files
+    * Select device 0M50DAF484C7G
+        ** FBGA
+        ** 484 pins
+        ** speed grade 7
+    * Don't need simulation
+    * Finish
    Project will be opened
 
 2. In the IP Catalog, type 'ADC' (without the quotes)
-    * select "Modular ADC_core IP"
-        * The Parameter Editor will open
+    * Select "Modular ADC_core IP"
+        ** The Parameter Editor will open
     * In the dialog box, enter the ADC name "adc"
     * Select at "Core variant": "ADC control core only"
-    * select at "Channels" the channels that will be used (also for the Temp Sensor)
-        * Note: on the DE10-Lite, only channels 1-6 are connected to the Arduino Header
+    * Select at "Channels" the channels that will be used (also for the Temp Sensor)
+        ** Note: on the DE10-Lite, only channels 1-6 are connected to the Arduino Header
     * Click "Generate HDL"
     * In the dialog box, under "Synthesis", select "VHDL"
-        * Simulation is not needed
+        ** Simulation is not needed
     * Click "Generate" and wait for the generation to complete
     * Click "Close"
     * There will be a second generation, click "Close" to complete
     * In the "IP Parameter Editor, click "Finish"
     * A message will be shown, please read carefully
-    * A second messag will be shown, please read carefully
+    * A second message will be shown, please read carefully
 
 3. In Quartus, Project Navigator select Files
     * Double-click on the "Files" icon to add files
     * Click on the three dots right of the "File name" field
     * Select "adc.qsys" and click on the "Open" button
     * Then click on "Apply"
-   The 'file' "adc.qsys" will be added
-    * Double-click on it if you which to modify the ADC
+   The file "adc.qsys" will be added
+    * Double-click on it if you wish to modify the ADC
 
 4. In the IP Catalog" type "PLL"
     * Select "ALTPLL"
-    * save as "pll" in the dialog box AND select "VHDL" and click on "Ok"
+    * Save as "pll" in the dialog box AND select "VHDL" and click on "Ok"
     * Set the clock frequency to 50 MHz (1 of 12)
     * In the next screen (2 of 12) select the "areset" input and "locked" output
     * Leave 3 of 12 intact
@@ -63,7 +63,6 @@
 
 [source,vhdl,subs=attributes+]
 ----
---startofvhdl
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -162,7 +161,6 @@ begin
     end process;
      
 end architecture;
---endofvhdl
 ----
 
 6. Start "Analysis & Elaboration"
@@ -184,11 +182,9 @@ end architecture;
 
 [source,vhdl,subs=attributes+]
 ----
-##beginascfile
 create_clock -period "50.0 MHz" [get_ports clk]
 derive_pll_clocks
 derive_clock_uncertainty
-##endsdcfile
 ----
     * save tha file as "de10_lite_adc.sdc"
 
@@ -196,13 +192,13 @@ derive_clock_uncertainty
 
 10. In Quartus, from the Tools menu, select Signal Tap Logic Analyzer
     * Under "Signal Configuration, slect 'clk' as clock signal
-        * Double-click on the three dots to open the Node Finder
-        * Set "Filter" to "Pins: all" and select 'clk'
+        ** Double-click on the three dots to open the Node Finder
+        ** Set "Filter" to "Pins: all" and select 'clk'
     * Set "Sample depth" to '2 K'
     * Now add signals via the "Setup" tab
-        * In the field, right-click and select "Add nodes"
-        * Set "Filter" to "Pins: all"
-        * Select everything except 'clk'
+        ** In the field, right-click and select "Add nodes"
+        ** Set "Filter" to "Pins: all"
+        ** Select everything except 'clk'
     * Set "Trigger Condition" of 'ready' to rising edge
     * Save the configuration with the name "stp1.stp" (default)
     * In the dialog box, click "Yes" to enable the Signal Tap
@@ -234,7 +230,7 @@ You are ready to go!
 
 1. make pins virtual
     * You can make outputs virtual in the Assignent Editor
-        * Now the output will not be connected to physical pins
+        ** Now the output will not be connected to physical pins
 
 2. Acquire from reset
     * You can use the reset (active low!) to trigger an acquisition
