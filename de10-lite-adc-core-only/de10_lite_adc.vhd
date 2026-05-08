@@ -68,9 +68,9 @@ begin
     -- The ADC subsystem
     adc0: adc
     port map (
-            adc_pll_clock_clk => clk10,                       -- 10 MHz from PLL (c1)
+            adc_pll_clock_clk => clk10,                       -- 10 MHz from PLL (c0)
             adc_pll_locked_export => locked,                  -- locked from PLL
-            clock_clk => clk50,                               -- 50 MHz from PLL (c0)
+            clock_clk => clk50,                               -- 50 MHz from PLL (c1)
             command_valid => '1',                             -- always valid
             command_channel => SW,                            -- channel between 0 and 31
             command_startofpacket => '1',                     -- Always at 1
