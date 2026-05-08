@@ -1,0 +1,29 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate /home/jesse/de10_late_adc/adc.qsys --block-symbol-file --output-directory=/home/jesse/de10_late_adc/adc --family="MAX 10" --part=10M50DAF484C7G
+Progress: Loading de10_late_adc/adc.qsys
+Progress: Reading input file
+Progress: Adding modular_adc_0 [altera_modular_adc 25.1]
+Progress: Parameterizing module modular_adc_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/jesse/de10_late_adc/adc.qsys --synthesis=VHDL --output-directory=/home/jesse/de10_late_adc/adc/synthesis --family="MAX 10" --part=10M50DAF484C7G
+Progress: Loading de10_late_adc/adc.qsys
+Progress: Reading input file
+Progress: Adding modular_adc_0 [altera_modular_adc 25.1]
+Progress: Parameterizing module modular_adc_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: adc: Generating "adc" for QUARTUS_SYNTH
+Info: modular_adc_0: "adc" instantiated altera_modular_adc "modular_adc_0"
+Info: control_internal: "modular_adc_0" instantiated altera_modular_adc_control "control_internal"
+Info: adc: Done "adc" with 3 modules, 9 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis
