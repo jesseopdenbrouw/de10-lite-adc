@@ -4,8 +4,9 @@ Projects using the onboard ADC of the https://www.terasic.com.tw/cgi-bin/page/ar
 
 The DE10-Lite board is equipped with a MAX10DA50 device. This device has two onboard ADCs but only the first ADC is connected to external pins. The pins of the second ADC are all connected to GND.
 
-
 The ADC has one dedicated analog input and eight dual digital/analog pins. The first ADC is also connected to the onboard temperature sensor.
+
+The dedicated analog input (channel 0) is connected to GND and is therefore not usable. Channels 1 to 8 are usable. Channel 17 is connected to the temperature sensor. Other channel numbers are not usable.
 
 For online reference, see https://docs.altera.com/r/docs/683596/24.1/max-10-analog-to-digital-converter-user-guide/max-10-analog-to-digital-converter-overview[the analog user guide].
 
