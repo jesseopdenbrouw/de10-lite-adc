@@ -163,6 +163,7 @@ begin
 end architecture;
 ----
 
+[start=6]
 6. Start "Analysis & Elaboration"
     * Check the synthesized design on the RTL Viewer
 
