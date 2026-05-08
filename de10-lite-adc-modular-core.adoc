@@ -190,6 +190,7 @@ derive_clock_uncertainty
 
     * save tha file as "de10_lite_adc.sdc"
 
+[start=9]
 9. Check if you can synthesize the design (but do not download yet)
 
 
