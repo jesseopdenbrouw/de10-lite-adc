@@ -186,9 +186,11 @@ create_clock -period "50.0 MHz" [get_ports clk]
 derive_pll_clocks
 derive_clock_uncertainty
 ----
+
     * save tha file as "de10_lite_adc.sdc"
 
 9. Check if you can synthesize the design (but do not download yet)
+
 
 10. In Quartus, from the Tools menu, select Signal Tap Logic Analyzer
     * Under "Signal Configuration, slect 'clk' as clock signal
