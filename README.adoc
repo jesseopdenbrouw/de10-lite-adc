@@ -1,0 +1,6 @@
+= DE10-Lite ADC Projects
+
+Projects using the onboard ADC of the https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=234&No=1021[DE10-Lite board] from Terasic.
+
+The DE10-Lite board is equipped with a MAX10 device. This device has two onboard ADCs but only ADC is connected to external pins.
+
