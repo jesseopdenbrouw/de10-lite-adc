@@ -1,0 +1,242 @@
+= DE10-Lite with Modular Core ADC
+
+== Create a project from scratch
+
+
+1. Create a project using the DE10-Lite board
+    * top level name & project name: de10_lite_adc
+    * select Empty project
+    * don't add files
+    * select device 0M50DAF484C7G
+        * FBGA
+        * 484 pins
+        * speed grade 7
+    * don't need simulation
+    * finish
+   Project will be opened
+
+2. In the IP Catalog, type 'ADC' (without the quotes)
+    * select "Modular ADC_core IP"
+        * The Parameter Editor will open
+    * In the dialog box, enter the ADC name "adc"
+    * Select at "Core variant": "ADC control core only"
+    * select at "Channels" the channels that will be used (also for the Temp Sensor)
+        * Note: on the DE10-Lite, only channels 1-6 are connected to the Arduino Header
+    * Click "Generate HDL"
+    * In the dialog box, under "Synthesis", select "VHDL"
+        * Simulation is not needed
+    * Click "Generate" and wait for the generation to complete
+    * Click "Close"
+    * There will be a second generation, click "Close" to complete
+    * In the "IP Parameter Editor, click "Finish"
+    * A message will be shown, please read carefully
+    * A second messag will be shown, please read carefully
+
+3. In Quartus, Project Navigator select Files
+    * Double-click on the "Files" icon to add files
+    * Click on the three dots right of the "File name" field
+    * Select "adc.qsys" and click on the "Open" button
+    * Then click on "Apply"
+   The 'file' "adc.qsys" will be added
+    * Double-click on it if you which to modify the ADC
+
+4. In the IP Catalog" type "PLL"
+    * Select "ALTPLL"
+    * save as "pll" in the dialog box AND select "VHDL" and click on "Ok"
+    * Set the clock frequency to 50 MHz (1 of 12)
+    * In the next screen (2 of 12) select the "areset" input and "locked" output
+    * Leave 3 of 12 intact
+    * Leave 4 of 12 intact
+    * Leave 5 of 12 intact
+    * In 6 of 12 set the output clock frequency to 10 MHz (c0)
+    * In 7 of 12 set the output clock frequency to 50 MHz (c1)
+    * Leave 8 of 12 intact (don't need another clock)
+    * Leave 9 of 12 intact (don't need another clock)
+    * Leave 10 of 12 intact (don't need another clock)
+    * Leave 11 of 12 intact
+    * Leave 12 of 12 intact and click "Finish"
+    * In the dialog box, click "Yes".
+   The the "Files" tab, "pll.qip" will be added.
+
+5. Now create a new VHDL file with the name "de10_lite_adc.vhdl"
+    * Enter the followin VHDL code:
+
+--startofvhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+LIBRARY altera_mf;
+USE altera_mf.all;
+
+entity de10_lite_adc is
+    port (clk : in std_logic;
+          reset_n : in std_logic;
+          sw : in std_logic_vector(4 downto 0);
+          ready : out std_logic;
+          command_ready          : out std_logic; 
+          response_channel       : out std_logic_vector(4 downto 0); 
+          response_data          : buffer std_logic_vector(11 downto 0);
+          response_startofpacket : out std_logic;  
+          response_endofpacket   : out std_logic;
+          reg_data               : out std_logic_vector(11 downto 0)
+         );
+end entity;
+
+architecture struct of de10_lite_adc is
+component adc is
+	port (
+		adc_pll_clock_clk      : in  std_logic                     := '0';             --  adc_pll_clock.clk
+		adc_pll_locked_export  : in  std_logic                     := '0';             -- adc_pll_locked.export
+		clock_clk              : in  std_logic                     := '0';             --          clock.clk
+		command_valid          : in  std_logic                     := '0';             --        command.valid
+		command_channel        : in  std_logic_vector(4 downto 0)  := (others => '0'); --               .channel
+		command_startofpacket  : in  std_logic                     := '0';             --               .startofpacket
+		command_endofpacket    : in  std_logic                     := '0';             --               .endofpacket
+		command_ready          : out std_logic;                                        --               .ready
+		reset_sink_reset_n     : in  std_logic                     := '0';             --     reset_sink.reset_n
+		response_valid         : out std_logic;                                        --       response.valid
+		response_channel       : out std_logic_vector(4 downto 0);                     --               .channel
+		response_data          : out std_logic_vector(11 downto 0);                    --               .data
+		response_startofpacket : out std_logic;                                        --               .startofpacket
+		response_endofpacket   : out std_logic                                         --               .endofpacket
+	);
+end component adc;
+component pll IS
+	PORT
+	(
+		areset		: IN STD_LOGIC  := '0';
+		inclk0		: IN STD_LOGIC  := '0';
+		c0		: OUT STD_LOGIC ;
+		c1		: OUT STD_LOGIC ;
+		locked		: OUT STD_LOGIC 
+	);
+END component pll;
+
+signal clk50, clk10 : std_logic;
+signal resetint, locked : std_logic;
+signal response_valid : std_LOGIC;
+
+begin
+
+    resetint <= not reset_n;
+    
+    -- The PLL
+    pll0: pll
+    port map (inclk0 => clk,
+              areset => resetint,
+              c0 => clk10,
+              c1 => clk50,
+              locked => locked
+             );
+
+    -- The ADC subsystem
+    adc0: adc
+    port map (
+            adc_pll_clock_clk => clk10,                       -- 10 MHz from PLL (c1)
+            adc_pll_locked_export => locked,                  -- locked from PLL
+            clock_clk => clk50,                               -- 50 MHz from PLL (c0)
+            command_valid => '1',                             -- always valid
+            command_channel => SW,                            -- channel between 0 and 31
+            command_startofpacket => '1',                     -- Always at 1
+            command_endofpacket => '1',                       -- Always at 1
+            command_ready => command_ready,
+            reset_sink_reset_n => reset_n,
+            response_valid => response_valid,
+            response_channel => response_channel,
+            response_data => response_data,
+            response_startofpacket => response_startofpacket,
+            response_endofpacket => response_endofpacket
+           );
+
+    -- Clock in the result
+    process (clk) is
+    begin
+        if rising_edge(clk) then
+            if response_valid = '1' then
+                reg_data <= response_data;
+            end if;
+            ready <= response_valid;
+        end if;
+    end process;
+     
+end architecture;
+--endofvhdl
+
+6. Start "Analysis & Elaboration"
+    * Check the synthesized design on the RTL Viewer
+
+7. Start the Pin Planner and set the pins for clk, areset and sw(4 downto 0)
+    * clk at pin P11, set I/O Standard to "3.3-V LVMOS"
+    * reset_n at pin B8 (KEY0), set I/O Standard to "3.3-V LVMOS"
+    * sw[4] at pin A12, set I/O Standard to "3.3-V LVMOS"
+    * sw[3] at pin C12, set I/O Standard to "3.3-V LVMOS"
+    * sw[2] at pin D12, set I/O Standard to "3.3-V LVMOS"
+    * sw[1] at pin C11, set I/O Standard to "3.3-V LVMOS"
+    * sw[0] at pin C10, set I/O Standard to "3.3-V LVMOS"
+    * leave the rest (you can set reg_data(11 downto 0) to leds)
+   Note: the output will be assigned random and may be connected to leds
+
+8. Add a SDC file
+    * To the SDC file, add the following:
+
+##beginascfile
+create_clock -period "50.0 MHz" [get_ports clk]
+derive_pll_clocks
+derive_clock_uncertainty
+##endsdcfile
+
+    * save tha file as "de10_lite_adc.sdc"
+
+9. Check if you can synthesize the design (but do not download yet)
+
+10. In Quartus, from the Tools menu, select Signal Tap Logic Analyzer
+    * Under "Signal Configuration, slect 'clk' as clock signal
+        * Double-click on the three dots to open the Node Finder
+        * Set "Filter" to "Pins: all" and select 'clk'
+    * Set "Sample depth" to '2 K'
+    * Now add signals via the "Setup" tab
+        * In the field, right-click and select "Add nodes"
+        * Set "Filter" to "Pins: all"
+        * Select everything except 'clk'
+    * Set "Trigger Condition" of 'ready' to rising edge
+    * Save the configuration with the name "stp1.stp" (default)
+    * In the dialog box, click "Yes" to enable the Signal Tap
+    * Leave the Signal Tab logic Analyzer open 
+
+11. Now synthesize the design.
+
+12. Program the device
+    * Probably via Quartus
+
+13. Select a analog input with the 'sw' switches
+    * Make sure that there is a voltage applied on the corresponding Arduino analog input
+    * You can apply a voltage from 0V to 5V
+    * 0V should read as "000" (hex) and 5V should read as "FFF" (hex)
+
+14. In the Signal Tap Logic Analyzer, click on the button "Scan Chain"
+    * The Analyzer should "see" the tap logic ("Ready to acquire")
+    * Select the "Data" tab
+    * Click in the "Instance" tab on "auto_signaltab_o"
+    * Press F5 to start the acquisition
+
+15. There should be a trigger almost instantly
+    * Here you see "FA5" which is almost 5V
+
+You are ready to go!
+
+
+== TIPS
+
+1. make pins virtual
+    * You can make outputs virtual in the Assignent Editor
+        * Now the output will not be connected to physical pins
+
+2. Acquire from reset
+    * You can use the reset (active low!) to trigger an acquisition
+    * Set "reset_n" to rising edge
+
+3. You can show internal signals, just add them
+    * Set in the Node Finder the Filter to "Registers: post-fitting"
+    * ... or anything else to find nodes
+
+
