@@ -13,6 +13,6 @@
 **dse*
 *riscv.archive.rpt
 *riscv_assignment_defaults.qdf
-*simulation/*
+*simulation
 *riscv_nativelink_simulation.rpt
 
