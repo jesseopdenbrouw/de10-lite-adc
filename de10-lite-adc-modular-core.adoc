@@ -23,7 +23,7 @@
     * Select at "Core variant": "ADC control core only"
     * Select at "Channels" the channels that will be used (also for the Temp Sensor)
         ** Note: on the DE10-Lite, only channels 1-6 are connected to the Arduino Header
-		** Note: channel 17 is the onboard temperature sensor
+        ** Note: channel 17 is the onboard temperature sensor
     * Click "Generate HDL"
     * In the dialog box, under "Synthesis", select "VHDL"
         ** Simulation is not needed
@@ -39,7 +39,7 @@
     * Click on the three dots right of the "File name" field
     * Select "adc.qsys" and click on the "Open" button
     * Then click on "Apply"
-	* The file "adc.qsys" will be added
+    * The file "adc.qsys" will be added
     * Double-click on it if you wish to modify the ADC
 
 4. In the IP Catalog" type "PLL"
@@ -58,7 +58,7 @@
     * Leave 11 of 12 intact
     * Leave 12 of 12 intact and click "Finish"
     * In the dialog box, click "Yes".
-   	* In the "Files" tab, "pll.qip" will be added.
+       * In the "Files" tab, "pll.qip" will be added.
 
 5. Now create a new VHDL file with the name "de10_lite_adc.vhd"
     * Enter the followin VHDL code:
@@ -68,14 +68,14 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-LIBRARY altera_mf;
-USE altera_mf.all;
+library altera_mf;
+use altera_mf.all;
 
 entity de10_lite_adc is
-    port (clk : in std_logic;
-          reset_n : in std_logic;
-          sw : in std_logic_vector(4 downto 0);
-          ready : out std_logic;
+    port (clk                    : in std_logic;
+          reset_n                : in std_logic;
+          sw                     : in std_logic_vector(4 downto 0);
+          ready                  : out std_logic;
           command_ready          : out std_logic; 
           response_channel       : out std_logic_vector(4 downto 0); 
           response_data          : buffer std_logic_vector(11 downto 0);
@@ -87,33 +87,33 @@ end entity;
 
 architecture struct of de10_lite_adc is
 component adc is
-	port (
-		adc_pll_clock_clk      : in  std_logic                     := '0';             --  adc_pll_clock.clk
-		adc_pll_locked_export  : in  std_logic                     := '0';             -- adc_pll_locked.export
-		clock_clk              : in  std_logic                     := '0';             --          clock.clk
-		command_valid          : in  std_logic                     := '0';             --        command.valid
-		command_channel        : in  std_logic_vector(4 downto 0)  := (others => '0'); --               .channel
-		command_startofpacket  : in  std_logic                     := '0';             --               .startofpacket
-		command_endofpacket    : in  std_logic                     := '0';             --               .endofpacket
-		command_ready          : out std_logic;                                        --               .ready
-		reset_sink_reset_n     : in  std_logic                     := '0';             --     reset_sink.reset_n
-		response_valid         : out std_logic;                                        --       response.valid
-		response_channel       : out std_logic_vector(4 downto 0);                     --               .channel
-		response_data          : out std_logic_vector(11 downto 0);                    --               .data
-		response_startofpacket : out std_logic;                                        --               .startofpacket
-		response_endofpacket   : out std_logic                                         --               .endofpacket
-	);
+    port (
+        adc_pll_clock_clk      : in  std_logic                     := '0';             --  adc_pll_clock.clk
+        adc_pll_locked_export  : in  std_logic                     := '0';             -- adc_pll_locked.export
+        clock_clk              : in  std_logic                     := '0';             --          clock.clk
+        command_valid          : in  std_logic                     := '0';             --        command.valid
+        command_channel        : in  std_logic_vector(4 downto 0)  := (others => '0'); --               .channel
+        command_startofpacket  : in  std_logic                     := '0';             --               .startofpacket
+        command_endofpacket    : in  std_logic                     := '0';             --               .endofpacket
+        command_ready          : out std_logic;                                        --               .ready
+        reset_sink_reset_n     : in  std_logic                     := '0';             --     reset_sink.reset_n
+        response_valid         : out std_logic;                                        --       response.valid
+        response_channel       : out std_logic_vector(4 downto 0);                     --               .channel
+        response_data          : out std_logic_vector(11 downto 0);                    --               .data
+        response_startofpacket : out std_logic;                                        --               .startofpacket
+        response_endofpacket   : out std_logic                                         --               .endofpacket
+    );
 end component adc;
-component pll IS
-	PORT
-	(
-		areset		: IN STD_LOGIC  := '0';
-		inclk0		: IN STD_LOGIC  := '0';
-		c0		: OUT STD_LOGIC ;
-		c1		: OUT STD_LOGIC ;
-		locked		: OUT STD_LOGIC 
-	);
-END component pll;
+component pll is
+    port
+    (
+        areset : in std_logic  := '0';
+        inclk0 : in std_logic  := '0';
+        c0     : out std_logic ;
+        c1     : out std_logic ;
+        locked : out std_logic 
+    );
+end component pll;
 
 signal clk50, clk10 : std_logic;
 signal resetint, locked : std_logic;
@@ -196,7 +196,7 @@ derive_clock_uncertainty
 9. Check if you can synthesize the design (but do not download yet)
 
 10. In Quartus, from the Tools menu, select Signal Tap Logic Analyzer
-    * Under "Signal Configuration, slect 'clk' as clock signal
+    * Under "Signal Configuration, select 'clk' as clock signal
         ** Double-click on the three dots to open the Node Finder
         ** Set "Filter" to "Pins: all" and select 'clk'
     * Set "Sample depth" to '2 K'
@@ -235,9 +235,9 @@ You are ready to go!
 
 1. make pins virtual
     * You can make outputs virtual in the Assignent Editor
-		** In the "To" field, type in the output pin name
-		** In the "Assignment Name" field, select "Virtuali Pin"
-		** In the "Value" field, select "Yes"
+        ** In the "To" field, type in the output pin name
+        ** In the "Assignment Name" field, select "Virtuali Pin"
+        ** In the "Value" field, select "Yes"
         ** Now the output will not be connected to physical pins but they are shown in the RTL Viewer
 
 2. Acquire from reset
