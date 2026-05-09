@@ -8,7 +8,7 @@ The ADC has one dedicated analog input and eight dual digital/analog pins. The f
 
 The dedicated analog input (channel 0) is connected to GND and is therefore not usable. Channels 1 to 6 are usable. They are connected to Arduino analog inputs A0 to A5. Channel 17 is connected to the temperature sensor. Other channel numbers are not usable.
 
-The maximum input voltage on the ADC inputs is 5V. The input voltages are fed to a front-end circuit which halves the input voltage (2.5V is the maximun input voltage of the ADC) and has a low pass filter (anti-alias filter) with a cut-off frequency of 500 kHz.
+The maximum input voltage on the ADC inputs is 5V. The input voltages are fed to a front-end circuit which halves the input voltage (2.5V is the maximun input voltage of the ADC) and has a first-order low pass filter (anti-alias filter) with a cut-off frequency of 500 kHz. The buffering op amp has a GBW product of 500 kHz.
 
 For online reference, see https://docs.altera.com/r/docs/683596/24.1/max-10-analog-to-digital-converter-user-guide/max-10-analog-to-digital-converter-overview[the analog user guide].
 
