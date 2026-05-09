@@ -1,0 +1,29 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate /mnt/d/PROJECTS/RISCVDEV/de10-lite-adc/de10-lite-adc-modular-core-withdisplay/adc.qsys --block-symbol-file --output-directory=/mnt/d/PROJECTS/RISCVDEV/de10-lite-adc/de10-lite-adc-modular-core-withdisplay/adc --family="MAX 10" --part=10M50DAF484C7G
+Progress: Loading de10-lite-adc-modular-core-withdisplay/adc.qsys
+Progress: Reading input file
+Progress: Adding modular_adc_0 [altera_modular_adc 25.1]
+Progress: Parameterizing module modular_adc_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /mnt/d/PROJECTS/RISCVDEV/de10-lite-adc/de10-lite-adc-modular-core-withdisplay/adc.qsys --synthesis=VHDL --output-directory=/mnt/d/PROJECTS/RISCVDEV/de10-lite-adc/de10-lite-adc-modular-core-withdisplay/adc/synthesis --family="MAX 10" --part=10M50DAF484C7G
+Progress: Loading de10-lite-adc-modular-core-withdisplay/adc.qsys
+Progress: Reading input file
+Progress: Adding modular_adc_0 [altera_modular_adc 25.1]
+Progress: Parameterizing module modular_adc_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: adc: Generating "adc" for QUARTUS_SYNTH
+Info: modular_adc_0: "adc" instantiated altera_modular_adc "modular_adc_0"
+Info: control_internal: "modular_adc_0" instantiated altera_modular_adc_control "control_internal"
+Info: adc: Done "adc" with 3 modules, 9 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis
