@@ -1,5 +1,7 @@
 = DE10-Lite with Modular Core ADC
 
+:imagedir: ./images
+
 == Create a project from scratch
 
 
@@ -15,7 +17,7 @@
     * Finish, project will be opened
 
 2. In the IP Catalog, type 'ADC' (without the quotes)
-    * Select "Modular ADC_core IP"
+    * Select "Modular ADC core IP"
         ** The Parameter Editor will open
     * In the dialog box, enter the ADC name "adc"
     * Select at "Core variant": "ADC control core only"
@@ -232,7 +234,10 @@ You are ready to go!
 
 1. make pins virtual
     * You can make outputs virtual in the Assignent Editor
-        ** Now the output will not be connected to physical pins
+		** In the "To" field, type in the output pin name
+		** In the "Assignment Name" field, select "Virtuali Pin"
+		** In the "Value" field, select "Yes"
+        ** Now the output will not be connected to physical pins but they are shown in the RTL Viewer
 
 2. Acquire from reset
     * You can use the reset (active low!) to trigger an acquisition
