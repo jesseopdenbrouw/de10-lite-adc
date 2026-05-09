@@ -23,6 +23,7 @@
     * Select at "Core variant": "ADC control core only"
     * Select at "Channels" the channels that will be used (also for the Temp Sensor)
         ** Note: on the DE10-Lite, only channels 1-6 are connected to the Arduino Header
+		** Note: channel 17 is the onboard temperature sensor
     * Click "Generate HDL"
     * In the dialog box, under "Synthesis", select "VHDL"
         ** Simulation is not needed
