@@ -1,0 +1,10 @@
+= DE10-Lite ADC with hex display
+
+This project reads an analog input and displays the value on the 7-segment display as a three-digit hex value.
+All channels (0 - 8 and temperature sensor, channel 17) are selected but only channels 1 - 6 and the temp sensor (channel 17) can be used as valid inputs.
+
+Start the Signal Tap Logic Analyzer to view the signals as waveforms.
+
+The reset button (KEY0) serves as the trigger input.
+
+
