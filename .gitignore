@@ -3,6 +3,7 @@
 */output_files
 */incremental_db
 */*.bak
+*/*.qws
 */*c5_pin_model_dump.txt
 */*serv_req_info.txt
 */*modelsim.ini
