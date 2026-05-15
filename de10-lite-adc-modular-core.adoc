@@ -237,7 +237,7 @@ You are ready to go!
     * You can make outputs virtual in the Assignent Editor
         ** In the "To" field, type in the output pin name
         ** In the "Assignment Name" field, select "Virtuali Pin"
-        ** In the "Value" field, select "Yes"
+        ** In the "Value" field, select "On"
         ** Now the output will not be connected to physical pins but they are shown in the RTL Viewer
 
 2. Acquire from reset
