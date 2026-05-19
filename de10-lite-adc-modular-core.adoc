@@ -9,7 +9,7 @@
     * Top level name & project name: de10_lite_adc
     * Select Empty project
     * Don't add files
-    * Select device 0M50DAF484C7G
+    * Select device 10M50DAF484C7G
         ** FBGA
         ** 484 pins
         ** speed grade 7
